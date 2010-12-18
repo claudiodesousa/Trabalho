@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.view.Results;
 
 @Resource
 public class SnippetController {
@@ -28,8 +29,15 @@ public class SnippetController {
 	
 	@Get
 	@Path("/snippets")
-	public List<Snippet> index() {
-		return repository.findAll();
+	public List<Snippet> index(Snippet s) {
+		if(s == null){
+			return repository.findAll();
+		}else{
+			result.include("snippet", s);
+			return repository.findAll();
+		}
+			
+		
 	}
 	
 	@Post
@@ -38,7 +46,7 @@ public class SnippetController {
 		validator.validate(snippet);
 		validator.onErrorUsePageOf(this).newSnippet();
 		repository.create(snippet);
-		result.redirectTo(this).index();
+		result.redirectTo(this).index(snippet);
 	}
 	
 	@Get
@@ -53,13 +61,15 @@ public class SnippetController {
 		validator.validate(snippet);
 		validator.onErrorUsePageOf(this).edit(snippet);
 		repository.update(snippet);
-		result.redirectTo(this).index();
+		result.redirectTo(this).index(snippet);
 	}
 	
 	@Get
 	@Path("/snippets/{snippet.id}/edit")
-	public Snippet edit(Snippet snippet) {
-		return repository.find(snippet.getId());
+	public void edit(Snippet snippet) {
+		this.result.use(Results.logic()).redirectTo(SnippetController.class).index(repository.find(snippet.getId()));
+		
+		
 	}
 
 	@Get
@@ -72,7 +82,7 @@ public class SnippetController {
 	@Path("/snippets/{snippet.id}")
 	public void destroy(Snippet snippet) {
 		repository.destroy(repository.find(snippet.getId()));
-		result.redirectTo(this).index();  
+		result.redirectTo(this).index(null);  
 	}
 	
 }
