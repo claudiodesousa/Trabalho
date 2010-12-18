@@ -34,6 +34,11 @@
     <button type="submit">Salvar</button>
   </div>
 </form>
+<form action="<c:url value="/snippets"/>" method="get">
+	<div class="actions">
+    <button type="submit">Criar Novo</button>
+  </div>
+</form>
 <table>
   <tr>
    <th>Nome</th>
