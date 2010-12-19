@@ -39,12 +39,25 @@
     <button type="submit">Criar Novo</button>
   </div>
 </form>
+
+<td align="top">
+<form>
+ <div class="field" >
+    <input type="text" value="${codeshare.busca}" />
+  </div>
+
+ <div class="actions">
+    <button type="submit">Buscar</button>
+  </div>
+<br> <br> 
+</form>
+</td>
+</tr>
+</table>
+<h3>==== Listagem de codigos salvos ====</h3>
 <table>
   <tr>
-   <th>Nome</th>
-   <th>Trecho de codigo</th>
-   <th>Tags</th>
-   <th>Linguagem</th>
+   <th>== Nome ==</th>
    <th></th>
    <th></th>
    <th></th>
@@ -55,17 +68,8 @@
       <td>
       ${snippet.nome}
     </td>
-      <td>
-      ${snippet.codigo}
-    </td>
-      <td>
-      ${snippet.tags}
-    </td>
-      <td>
-      ${snippet.linguagem}
-    </td>
-      <td><a href="<c:url value="/snippets/${snippet.id}"/>">show</a></td>
-    <td><a href="<c:url value="/snippets/${snippet.id}/edit"/>">edit</a></td>
+
+    <td><a href="<c:url value="/snippets/${snippet.id}/edit"/>">  Ver o codigo</a></td>
     <td>
       <form action="<c:url value="/snippets/${snippet.id}"/>" method="post">
     	  <input type="hidden" name="_method" value="delete"/>
@@ -77,5 +81,4 @@
 </table>
 
 <br />
-<a href="<c:url value="/snippets/new"/>">New Snippet</a> 
 </body>
