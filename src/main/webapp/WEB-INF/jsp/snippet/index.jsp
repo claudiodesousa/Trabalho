@@ -41,9 +41,9 @@
 </form>
 
 <td align="top">
-<form>
+<form action="<c:url value="/snippets/search"/>" method="post">
  <div class="field" >
-    <input type="text" value="${codeshare.busca}" />
+    <input type="text" name="tag" />
   </div>
 
  <div class="actions">
@@ -52,8 +52,6 @@
 <br> <br> 
 </form>
 </td>
-</tr>
-</table>
 <h3>==== Listagem de codigos salvos ====</h3>
 <table>
   <tr>
@@ -73,7 +71,7 @@
     <td>
       <form action="<c:url value="/snippets/${snippet.id}"/>" method="post">
     	  <input type="hidden" name="_method" value="delete"/>
-    	  <button type="submit" onclick="return confirm('Are you sure?')">destroy</button>
+    	  <button type="submit" onclick="return confirm('Você tem certeza?')">Remover</button>
 	    </form>
 	  </td>
     </tr>

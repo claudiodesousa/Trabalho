@@ -29,16 +29,29 @@ public class SnippetController {
 	
 	@Get
 	@Path("/snippets")
-	public List<Snippet> index(Snippet s) {
-		if(s == null){
+	public List<Snippet> index(Snippet s, List<Snippet> snippetList) {
+		if(s == null && snippetList == null){
 			return repository.findAll();
 		}else{
-			result.include("snippet", s);
-			return repository.findAll();
+			if(snippetList == null){
+				result.include("snippet", s);
+				return repository.findAll();
+			}
+			else{
+				return snippetList;
+			}
+			
 		}
 			
 		
 	}
+	
+	@Post
+	@Path("/snippets/search")
+	public void searchByTag(String tag) {	
+			result.redirectTo(this).index(null,repository.findbyTag(tag));
+	}
+	
 	
 	@Post
 	@Path("/snippets")
@@ -46,7 +59,7 @@ public class SnippetController {
 		validator.validate(snippet);
 		validator.onErrorUsePageOf(this).newSnippet();
 		repository.create(snippet);
-		result.redirectTo(this).index(snippet);
+		result.redirectTo(this).index(snippet,null);
 	}
 	
 	@Get
@@ -61,13 +74,13 @@ public class SnippetController {
 		validator.validate(snippet);
 		validator.onErrorUsePageOf(this).edit(snippet);
 		repository.update(snippet);
-		result.redirectTo(this).index(snippet);
+		result.redirectTo(this).index(snippet,null);
 	}
 	
 	@Get
 	@Path("/snippets/{snippet.id}/edit")
 	public void edit(Snippet snippet) {
-		this.result.use(Results.logic()).redirectTo(SnippetController.class).index(repository.find(snippet.getId()));
+		this.result.use(Results.logic()).redirectTo(SnippetController.class).index(repository.find(snippet.getId()),null);
 		
 		
 	}
@@ -82,7 +95,7 @@ public class SnippetController {
 	@Path("/snippets/{snippet.id}")
 	public void destroy(Snippet snippet) {
 		repository.destroy(repository.find(snippet.getId()));
-		result.redirectTo(this).index(null);  
+		result.redirectTo(this).index(null,null);  
 	}
 	
 }
