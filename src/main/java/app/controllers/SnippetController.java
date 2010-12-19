@@ -67,7 +67,6 @@ public class SnippetController {
 	@Get
 	@Path("/snippets/{snippet.id}/edit")
 	public void edit(Snippet snippet) {
-		//repository.findbyTag("teste");
 		this.result.use(Results.logic()).redirectTo(SnippetController.class).index(repository.find(snippet.getId()));
 		
 		
