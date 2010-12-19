@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <body>
+<script src="/codepress/codepress.js" type="text/javascript"></script> 
 <h1>Salve seu codigo</h1>
 <c:if test="${not empty errors}">
 	<c:forEach items="${errors}" var="error">
@@ -18,10 +19,11 @@
     Nome:<br />
     <input type="text" name="snippet.nome" value="${snippet.nome}"/>
   </div>
-  <div class="field">
+  
     Codigo:<br />
-    <textarea name="snippet.codigo" cols="50"  rows="8" value=""/>${snippet.codigo}</textarea>
-  </div>
+    
+    <textarea id="codigo" name="snippet.codigo" class="codepress java linenumbers-off" style="width:700px;height:200px;" wrap="off"/>${snippet.codigo}</textarea>
+ 
   <div class="field">
     Tags:<br />
     <input type="text" name="snippet.tags" value="${snippet.tags}"/>
