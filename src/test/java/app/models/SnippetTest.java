@@ -4,8 +4,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import junit.framework.Assert;
 
-import org.aspectj.lang.annotation.Before;
-import org.hibernate.AssertionFailure;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

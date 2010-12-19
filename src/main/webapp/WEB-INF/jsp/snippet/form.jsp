@@ -17,8 +17,9 @@
     <input type="text" name="snippet.nome" value="${snippet.nome}"/>
   </div>
   <div class="field">
-    Codigo:<br />
-    <input type="text" name="snippet.codigo" value="${snippet.codigo}"/>
+Codigo:<br/>
+<textarea id="codigo" name="snippet.codigo" class="codepress java linenumbers-off" style="width:480px;height:200px;" wrap="off"/>${snippet.codigo}</textarea>
+
   </div>
   <div class="field">
     Tags:<br />

@@ -45,7 +45,7 @@ public class SnippetRepositoryImplTest {
         EntityManager e = null;
         SnippetRepository instance = new SnippetRepositoryImpl(e);
         List expResult = new ArrayList<Snippet>();
-        List result = instance.findbyTag(tag);
+        expResult = instance.findbyTag(tag);
         //List result = new ArrayList<Snippet>();
         //result.add(instance.findbyTag(tag));
         assertEquals(expResult, result);

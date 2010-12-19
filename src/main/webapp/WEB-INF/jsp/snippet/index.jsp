@@ -310,9 +310,9 @@
 			
 			
 				<tr>
-					<td align="right">
+					<td>
 
-						<form action="<c:url value="/snippets/search"/>" method="post">
+						<form action="<c:url value="/snippets/search"/>" method="post" >
 	 						<div class="field" >
 	    						<input type="text" name="tag" />
 	    						<button type="submit">Buscar</button>
