@@ -2,10 +2,17 @@ package app.models;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
+import junit.framework.Assert;
 
+import org.aspectj.lang.annotation.Before;
+import org.hibernate.AssertionFailure;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SnippetTest {
+	
 
     @Test public void testSnippetNotNull() {
     	Snippet s = new Snippet();
@@ -25,6 +32,8 @@ public class SnippetTest {
     	assertEquals("c, for", s.getTags());
     	assertEquals("c", s.getLinguagem());
     }
+    
+
     
     @Test public void testNewSnippetWithoutFieldsShouldFail(){
     	String nome = "aa",linguagem = "c",codigo = "for",tags = "c, for";
@@ -49,6 +58,37 @@ public class SnippetTest {
     	assertNull(s.getLinguagem());
     	assertNull(s.getTags());
     }
+    
+    @Test public void testSnippetWithoutNome(){
+    	String nome = "aa",linguagem = "c",codigo = "for",tags = "c, for";
+    	Snippet s = new Snippet();
+    	s.setLinguagem(linguagem);
+    	s.setCodigo(codigo);
+    	s.setTags(tags);
+    	assertNull(s.getNome());
+    	assertNotNull(s.getCodigo());
+    	assertNotNull(s.getTags());
+    	assertNotNull(s.getLinguagem());
+    	assertEquals("c", s.getLinguagem());
+    	assertEquals("c, for", s.getTags());
+    	assertEquals("for", s.getCodigo());
+    }
+    
+    @Test public void testSnippetWithoutCodigo(){
+    	String nome = "aa",linguagem = "c",codigo = "for",tags = "c, for";
+    	Snippet s = new Snippet();
+    	s.setLinguagem(linguagem);
+    	s.setNome(nome);
+    	s.setTags(tags);
+    	assertNull(s.getCodigo());
+    	assertNotNull(s.getNome());
+    	assertNotNull(s.getTags());
+    	assertNotNull(s.getLinguagem());
+    	assertEquals("c", s.getLinguagem());
+    	assertEquals("c, for", s.getTags());
+    	assertEquals("aa", s.getNome());
+    }
+    
     
     
     
