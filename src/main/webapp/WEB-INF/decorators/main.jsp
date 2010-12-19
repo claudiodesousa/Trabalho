@@ -11,6 +11,5 @@
   </head>
   <body>
     <decorator:body/>
-    <script type="text/javascript" src="<c:url value="/javascripts/jquery.min.js"/>"></script>
   </body>
 </html>

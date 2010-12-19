@@ -30,20 +30,14 @@ public class SnippetController {
 	@Get
 	@Path("/snippets")
 	public List<Snippet> index(Snippet s, List<Snippet> snippetList) {
-		if(s == null && snippetList == null){
+		if(snippetList == null){
+			result.include("snippet", s);
 			return repository.findAll();
-		}else{
-			if(snippetList == null){
-				result.include("snippet", s);
-				return repository.findAll();
-			}
-			else{
-				return snippetList;
-			}
-			
 		}
-			
-		
+		else{
+			result.include("snippet", s);
+			return snippetList;
+		}
 	}
 	
 	@Post

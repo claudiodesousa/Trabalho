@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <body>
 <script src="/codepress/codepress.js" type="text/javascript"></script> 
+<script type="text/javascript" src="<c:url value="/javascripts/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/javascripts/lib.js"/>"></script>
 <h1>Salve seu codigo</h1>
 <c:if test="${not empty errors}">
 	<c:forEach items="${errors}" var="error">
@@ -8,37 +10,43 @@
 	</c:forEach>
 </c:if>
 
-<form action="<c:url value="/snippets"/>" method="post">
+<form method="post" >
   
   <c:if test="${not empty snippet.id}">
-    <input type="hidden" name="snippet.id" value="${snippet.id}"/>
-    <input type="hidden" name="_method" value="put"/>
+    <input id="id_snippet" type="hidden" name="snippet.id" value="${snippet.id}"/>
+      <input id="atualiza" type="hidden" name="_method" value="put"/>
   </c:if>
 
   <div class="field">
     Nome:<br />
-    <input type="text" name="snippet.nome" value="${snippet.nome}"/>
+    <input id="snippet_nome" type="text" name="snippet.nome" value="${snippet.nome}"/>
   </div>
-  
+   <div class="cd">
     Codigo:<br />
-    
-    <textarea id="codigo" name="snippet.codigo" class="codepress java linenumbers-off" style="width:700px;height:200px;" wrap="off"/>${snippet.codigo}</textarea>
- 
+    <div class="cd2">
+   			<textarea id="cp-java" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-php" style="display:none">${snippet.codigo}</textarea>
+<!-- 		<textarea id="snippet_codigo" name="snippet.codigo" style="width:700px;height:200px;" >${snippet.codigo}</textarea>--->
+	</div>
+	 <textarea id="snippet_codigo" name="snippet.codigo" class="codepress  <c:choose> <c:when test="${snippet.linguagem eq \"java\"}">java"</c:when> <c:when test="${snippet.linguagem eq \"php\"}">php"</c:when><c:otherwise>java"</c:otherwise></c:choose> style="width:700px;height:200px;" >${snippet.codigo}</textarea>
+	</div>
   <div class="field">
     Tags:<br />
-    <input type="text" name="snippet.tags" value="${snippet.tags}"/>
+    <input id="snippet_tags" type="text" name="snippet.tags" value="${snippet.tags}"/>
   </div>
   <div class="field">
     Linguagem:<br />
-    <input type="text" name="snippet.linguagem" value="${snippet.linguagem}"/>
+    <select  id="snippet_linguagem" name="snippet.linguagem" onchange="mudalinguagem()" >
+  <option  value="java" <c:if test="${snippet.linguagem eq \"java\" }"> selected="selected" </c:if>>Java</option>
+   <option  value="php" <c:if test="${snippet.linguagem eq \"php\" }"> selected="selected" </c:if>>PHP</option>  
+</select>
+<!--    <input id="snippet_linguagem" type="text" name="snippet.linguagem" value="${snippet.linguagem}"/>-->
   </div>
-  <div class="actions">
-    <button type="submit">Salvar</button>
-  </div>
+    <button id="salvar" type="submit">Salvar</button>
 </form>
 <form action="<c:url value="/snippets"/>" method="get">
 	<div class="actions">
-    <button type="submit">Criar Novo</button>
+   <button id="novo" type="submit">Criar Novo</button>
   </div>
 </form>
 
@@ -81,4 +89,11 @@
 </table>
 
 <br />
+<script>
+
+
+
+$("#salvar").click(salvar);
+
+</script>
 </body>
