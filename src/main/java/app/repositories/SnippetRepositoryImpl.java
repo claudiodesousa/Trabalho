@@ -1,5 +1,7 @@
 package app.repositories;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.com.caelum.vraptor.ioc.Component;
@@ -12,5 +14,14 @@ public class SnippetRepositoryImpl
 
 	public SnippetRepositoryImpl(EntityManager entityManager) {
 		super(entityManager);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Snippet> findbyTag(String tag) {
+	return  (List<Snippet>)entityManager.createQuery("From snippet " + "where tags like" + "%" + tag + "%").getResultList();
+		
+		
+		
 	}
 }
