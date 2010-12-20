@@ -21,11 +21,24 @@
     Nome:<br />
     <input id="snippet_nome" type="text" name="snippet.nome" value="${snippet.nome}"/>
   </div>
-	  <div class="field">
+    <div class="field">
     Linguagem:<br />
     <select  id="snippet_linguagem" name="snippet.linguagem" onchange="mudalinguagem()" >
   <option  value="java" <c:if test="${snippet.linguagem eq \"java\" }"> selected="selected" </c:if>>Java</option>
-   <option  value="php" <c:if test="${snippet.linguagem eq \"php\" }"> selected="selected" </c:if>>PHP</option>  
+   <option  value="php" <c:if test="${snippet.linguagem eq \"php\" }"> selected="selected" </c:if>>PHP</option>
+   <option  value="c" <c:if test="${snippet.linguagem eq \"C\" }"> selected="selected" </c:if>>C</option>
+   <option  value="c++" <c:if test="${snippet.linguagem eq \"C++\" }"> selected="selected" </c:if>>C++</option>  
+   <option  value="c#" <c:if test="${snippet.linguagem eq \"C#\" }"> selected="selected" </c:if>>C#</option>
+   <option  value="python" <c:if test="${snippet.linguagem eq \"python\" }"> selected="selected" </c:if>>Python</option>  
+   <option  value="ruby" <c:if test="${snippet.linguagem eq \"ruby\" }"> selected="selected" </c:if>>Ruby</option>
+   <option  value="perl" <c:if test="${snippet.linguagem eq \"perl\" }"> selected="selected" </c:if>>Perl</option>  
+   <option  value="fortran" <c:if test="${snippet.linguagem eq \"fortran\" }"> selected="selected" </c:if>>Fortran</option>
+   <option  value="cobol" <c:if test="${snippet.linguagem eq \"cobol\" }"> selected="selected" </c:if>>Cobol</option>
+    <option  value="lisp" <c:if test="${snippet.linguagem eq \"lisp\" }"> selected="selected" </c:if>>Lisp</option>  
+   <option  value="delphi" <c:if test="${snippet.linguagem eq \"delphi\" }"> selected="selected" </c:if>>Delphi</option>
+   <option  value="html" <c:if test="${snippet.linguagem eq \"html\" }"> selected="selected" </c:if>>HTML</option>       
+	<option  value="sql" <c:if test="${snippet.linguagem eq \"sql\" }"> selected="selected" </c:if>>SQL</option>
+   <option  value="css" <c:if test="${snippet.linguagem eq \"css\" }"> selected="selected" </c:if>>CSS</option>      
 </select>
 <!--    <input id="snippet_linguagem" type="text" name="snippet.linguagem" value="${snippet.linguagem}"/>-->
   </div>
@@ -34,6 +47,20 @@
     <div class="cd2">
    			<textarea id="cp-java" style="display:none">${snippet.codigo}</textarea>
    			<textarea id="cp-php" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-c" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-c++" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-c#" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp- python" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-ruby" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-perl" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-fortran" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-cobol" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-lisp" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-delphi" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-html" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-sql" style="display:none">${snippet.codigo}</textarea>
+   			<textarea id="cp-css" style="display:none">${snippet.codigo}</textarea>
+   			
 <!-- 		<textarea id="snippet_codigo" name="snippet.codigo" style="width:700px;height:200px;" >${snippet.codigo}</textarea>--->
 	</div>
 	 <textarea id="snippet_codigo" name="snippet.codigo" class="codepress  <c:choose> <c:when test="${snippet.linguagem eq \"java\"}">java"</c:when> <c:when test="${snippet.linguagem eq \"php\"}">php"</c:when><c:otherwise>java"</c:otherwise></c:choose> style="width:700px;height:200px;" >${snippet.codigo}</textarea>
@@ -82,19 +109,4 @@
     <td>
       <form action="<c:url value="/snippets/${snippet.id}"/>" method="post">
     	  <input type="hidden" name="_method" value="delete"/>
-    	  <button type="submit" onclick="return confirm('Você tem certeza?')">Remover</button>
-	    </form>
-	  </td>
-    </tr>
-</c:forEach>
-</table>
-
-<br />
-<script>
-
-
-
-$("#salvar").click(salvar);
-
-</script>
-</body>
+    	  <button type="submit" onclick="return confirm('Voc
