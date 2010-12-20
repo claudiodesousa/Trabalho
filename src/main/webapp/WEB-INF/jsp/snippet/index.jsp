@@ -10,7 +10,7 @@
 	</c:forEach>
 </c:if>
 
-<form method="post" >
+<form action=/snippets method="post" >
   
   <c:if test="${not empty snippet.id}">
     <input id="id_snippet" type="hidden" name="snippet.id" value="${snippet.id}"/>
@@ -27,23 +27,20 @@
   <option  value="java" <c:if test="${snippet.linguagem eq \"java\" }"> selected="selected" </c:if>>Java</option>
    <option  value="php" <c:if test="${snippet.linguagem eq \"php\" }"> selected="selected" </c:if>>PHP</option>  
 </select>
-<!--    <input id="snippet_linguagem" type="text" name="snippet.linguagem" value="${snippet.linguagem}"/>-->
   </div>
    <div class="cd">
     Codigo:<br />
-    <div class="cd2">
    			<textarea id="cp-java" style="display:none">${snippet.codigo}</textarea>
    			<textarea id="cp-php" style="display:none">${snippet.codigo}</textarea>
-<!-- 		<textarea id="snippet_codigo" name="snippet.codigo" style="width:700px;height:200px;" >${snippet.codigo}</textarea>--->
-	</div>
-	 <textarea id="snippet_codigo" name="snippet.codigo" class="codepress  <c:choose> <c:when test="${snippet.linguagem eq \"java\"}">java"</c:when> <c:when test="${snippet.linguagem eq \"php\"}">php"</c:when><c:otherwise>java"</c:otherwise></c:choose> style="width:700px;height:200px;" >${snippet.codigo}</textarea>
+	 <textarea id="snippet_codigo" class="codepress  <c:choose> <c:when test="${snippet.linguagem eq \"java\"}">java"</c:when> <c:when test="${snippet.linguagem eq \"php\"}">php"</c:when><c:otherwise>java"</c:otherwise></c:choose> style="width:700px;height:200px;" >${snippet.codigo}</textarea>
+	 <input type="hidden" id="snippet" name="snippet.codigo" value="${snippet.codigo}" />
 	</div>
   <div class="field">
     Tags:<br />
     <input id="snippet_tags" type="text" name="snippet.tags" value="${snippet.tags}"/>
   </div>
 
-    <button id="salvar" type="submit">Salvar</button>
+    <button id="salvar" type="submit" onclick="javascript:enviar(snippet_codigo.getCode())">Salvar</button>
 </form>
 <form action="<c:url value="/snippets"/>" method="get">
 	<div class="actions">
@@ -82,7 +79,7 @@
     <td>
       <form action="<c:url value="/snippets/${snippet.id}"/>" method="post">
     	  <input type="hidden" name="_method" value="delete"/>
-    	  <button type="submit" onclick="return confirm('Você tem certeza?')">Remover</button>
+    	  <button type="submit" onclick="return confirm('VocÃª tem certeza?')">Remover</button>
 	    </form>
 	  </td>
     </tr>
@@ -90,11 +87,4 @@
 </table>
 
 <br />
-<script>
-
-
-
-$("#salvar").click(salvar);
-
-</script>
 </body>

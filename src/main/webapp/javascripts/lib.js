@@ -1,6 +1,8 @@
-var salvo = function(res) {
-   alert('Salvo com sucesso');
-   location.replace("/snippets");
+var salvo = function(res,  status) {
+	var txt = res.responseText;
+	var data = eval('('+txt+')');	  
+    alert(status);
+    location.replace("/snippets");
    //location.reload();
 }
 var salvar = function() {
@@ -26,12 +28,16 @@ var salvar = function() {
 var mudalinguagem = function(){
 	
 	var l = $('[name=snippet.linguagem]').val();
-	//$('.cd2').remove();
-	//var codigo = '<div class="cd2"><textarea id="snippet_codigo" name="snippet.codigo" class="codepress '+ l +'" style="width:700px;height:200px;" ></textarea></div>'
-	//$(codigo).appendTo('.cd');
+	var text = snippet_codigo.getCode();
 	snippet_codigo.edit('cp-'+l,l)
+	snippet_codigo.toggleEditor();
+	snippet_codigo.setCode(text);
+	snippet_codigo.toggleEditor();
 
-	//snippet_codigo.edit('snippet_codigo', l);
 	
-	
+}
+
+function enviar(code)
+{
+	$('#snippet').val(code);
 }

@@ -1,7 +1,6 @@
 package app.controllers;
 
 import java.util.List;
-
 import app.models.Snippet;
 import app.repositories.SnippetRepository;
 import br.com.caelum.vraptor.Delete;
@@ -12,6 +11,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.caelum.vraptor.view.Results;
 
 @Resource
@@ -51,7 +51,11 @@ public class SnippetController {
 	@Path("/snippets")
 	public void create(Snippet snippet) {
 		validator.validate(snippet);
-		validator.onErrorUsePageOf(this).newSnippet();
+		if(snippet.getCodigo().isEmpty() || snippet.getLinguagem().isEmpty()|| snippet.getTags().isEmpty() || snippet.getNome().isEmpty()){
+			validator.add(new ValidationMessage("errors","Todos os campos devem estar preenchidos"));
+		}
+		
+		validator.onErrorForwardTo(SnippetController.class).index(snippet,null);
 		repository.create(snippet);
 		result.redirectTo(this).index(snippet,null);
 	}
