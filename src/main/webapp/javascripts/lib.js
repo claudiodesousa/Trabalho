@@ -1,5 +1,6 @@
 var salvo = function(res) {
    alert('Salvo com sucesso');
+   location.replace("/snippets");
    //location.reload();
 }
 var salvar = function() {
