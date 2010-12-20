@@ -10,12 +10,12 @@ import javax.persistence.EntityManager;
 import app.models.Snippet;
 import app.repositories.SnippetRepository;
 import app.repositories.SnippetRepositoryImpl;
-/*
+
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.caelum.vraptor.validator.Message;
-import br.com.caelum.vraptor.validator.ValidationException;*/
+import br.com.caelum.vraptor.validator.ValidationException;
 
 import org.junit.*;
 import static org.junit.Assert.*;
