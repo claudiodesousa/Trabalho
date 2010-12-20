@@ -39,5 +39,9 @@ var mudalinguagem = function(){
 
 function enviar(code)
 {
-	$('#snippet').val(code);
+	if(code == '')
+		$('#snippet').val(code);
+	else
+		$('#snippet').val('');
+	
 }
