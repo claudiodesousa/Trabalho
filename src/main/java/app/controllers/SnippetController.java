@@ -70,7 +70,10 @@ public class SnippetController {
 	@Path("/snippets")
 	public void update(Snippet snippet) {
 		validator.validate(snippet);
-		validator.onErrorUsePageOf(this).edit(snippet);
+		if(snippet.getCodigo().isEmpty() || snippet.getLinguagem().isEmpty()|| snippet.getTags().isEmpty() || snippet.getNome().isEmpty()){
+			validator.add(new ValidationMessage("errors","Todos os campos devem estar preenchidos"));
+		}
+		validator.onErrorForwardTo(SnippetController.class).index(snippet,null);
 		repository.update(snippet);
 		result.redirectTo(this).index(snippet,null);
 	}
